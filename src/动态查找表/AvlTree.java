@@ -7,7 +7,7 @@ public class AvlTree {
 		tree.insert(1);
 		tree.insert(2);
 		tree.insert(3);
-		tree.remove(3);
+//		tree.remove(3);
 		System.out.println(tree.find(3));
 	}
 	
@@ -66,7 +66,7 @@ public class AvlTree {
 	 * @param t，原有树
 	 * @return 新的树
 	 */
-	public AvlNode insert(int x, AvlNode t) {
+	private AvlNode insert(int x, AvlNode t) {
 		if(t == null) {
 			AvlNode new_tree = new AvlNode();
 			new_tree.data = x;
@@ -92,11 +92,11 @@ public class AvlTree {
 	
 	//	以下是四种旋转
 	/**
-	 * 左旋
+	 * 左旋，靠左的外侧节点
 	 * @param t，当前树
 	 * @return 新的树
 	 */
-	public AvlNode LL(AvlNode t) {
+	private AvlNode LL(AvlNode t) {
 		AvlNode tl = t.left;
 		t.left = tl.right;
 		tl.right = t;
@@ -106,7 +106,12 @@ public class AvlTree {
 		return t;
 	}
 	
-	public AvlNode RR(AvlNode t) {
+	/**
+	 * 右旋，靠右的外侧节点
+	 * @param t
+	 * @return
+	 */
+	private AvlNode RR(AvlNode t) {
 		AvlNode tl = t.right;
 		t.right = tl.left;
 		tl.left = t;
@@ -116,13 +121,23 @@ public class AvlTree {
 		return t;
 	}
 	
-	public AvlNode LR(AvlNode t) {
+	/**
+	 * 内侧节点的旋转，靠左的内侧节点
+	 * @param t
+	 * @return
+	 */
+	private AvlNode LR(AvlNode t) {
 		t = RR(t.left);
 		t = LL(t);
 		return t;
 	}
 	
-	public AvlNode RL(AvlNode t) {
+	/**
+	 * 靠右的内侧节点
+	 * @param t
+	 * @return
+	 */
+	private AvlNode RL(AvlNode t) {
 		t = LL(t.right);
 		t = RR(t);
 		return t;
@@ -134,7 +149,7 @@ public class AvlTree {
 	 * @param t
 	 * @return
 	 */
-	public boolean remove(int x, AvlNode t) {
+	private boolean remove(int x, AvlNode t) {
 		boolean stop = false;
 		boolean result = false;
 		int subTree = 0;
